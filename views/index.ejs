@@ -227,15 +227,18 @@
     $('#tanggal_vaksin').datepicker({
       minDate,
       maxDate,
-      disableDates: [],
-      format: 'yyyy-MM-dd'
+      disableDates: [
+        "2022/02/13", "2022/02/14", "2022/02/20", "2022/02/21",
+        "2022/02/27", "2022/02/28"],
+      format: 'yyyy mm dd'
     });
     $("#before_vaksin_3").hide()
     $("#tanggal_vaksin_").hide()
 
     const kodeVak = () => {
       const value = $("#kode_vaksin_3").val();
-      if(value) {
+      const regex = /[a-zA-Z0-9][-]+/g
+      if(value.match(regex)) {
         $("#before_vaksin_3").show()
       } else {
         $("#before_vaksin_3").hide()
