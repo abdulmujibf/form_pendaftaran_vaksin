@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
@@ -14,28 +15,32 @@
 </head>
 
 <body>
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
   <div class="container my-5">
     <div class="card p-2">
 
       <!-- Image -->
       <div class="row justify-content-center">
         <% for(let i=0; i < 6; i++) { %>
-          <div class="col-2 clearfix justify-content-center">
-            <img class="img-fluid" src="./images/JABAR-DINKES_BANDUNG.png" alt="Jakarta">
-          </div>
-          <% } %>
-            <% for(let i=0; i < 4; i++) { %>
-              <div class="col-2 clearfix justify-content-center">
-                <img class="img-fluid" src="./images/JABAR-DINKES_BANDUNG.png" alt="Jakarta">
-              </div>
-              <% } %>
+        <div class="col-2 clearfix justify-content-center">
+          <img class="img-fluid" src="./images/JABAR-DINKES_BANDUNG.png" alt="Jakarta">
+        </div>
+        <% } %>
+        <% for(let i=0; i < 4; i++) { %>
+        <div class="col-2 clearfix justify-content-center">
+          <img class="img-fluid" src="./images/JABAR-DINKES_BANDUNG.png" alt="Jakarta">
+        </div>
+        <% } %>
       </div>
 
       <hr class="mx-5">
 
       <!-- Header -->
       <div class="d-flex justify-content-center flex-column align-items-center">
-        <img class="img-fluid mb-3" src="./images/JABAR-DINKES_BANDUNG.png" alt="Jakarta">
+        <img class="img-fluid mb-4" src="./images/JABAR-DINKES_BANDUNG.png" alt="Jakarta">
         <h4>Selamat Datang!</h4>
         <p>Formulir Pendaftaran i-SERVE Vaccine Jawa Barat</p>
       </div>
@@ -46,123 +51,160 @@
       <form action="" class="px-2">
 
         <!-- Vaksinasi Ke -->
-        <label>Vaksinasi Ke: </label>
-        <div class="form-group mb-3">
-          <input type="radio" name="vaksinasi_ke" class="form-check-input" value="1" id="vaksinasi_ke">
-          <label for="vaksinasi_ke" class="form-check-label">1</label>
+        <div class="form-floating">
+          <input type="text" class="form-control" nama="kode_vaksin_3" id="kode_vaksin_3" placeholder="Masukkan Nama"
+            autocomplete="off" maxlength="10" onchange="kodeVak()">
+          <label class="floating-input" for="kode_vaksin_3">Kode Vaksin 3</label>
+        </div>
+        <div class="mb-4">
+          <span class="small text-muted mb-4">Cara melihat kode vaksin 3 klik <span role="button"
+              class="text-decoration-underline text-primary" data-bs-toggle="modal"
+              data-bs-target="#instructions">disini</span> | <span class="small text-danger mb-4">* Wajib Diisi</span></span>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="instructions" tabindex="-1" aria-labelledby="kode_vaksin_3" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="kode_vaksin_3">Cara melihat kode vaksin 3</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Tanggal Vaksin -->
-        <label for="tanggal_vaksin">Tanggal Vaksin</label>
-        <div class="form-group mb-3">
-          <!-- <select name="tanggal_vaksin" class="form-control column3">
-            <% for(let i=0; i < 27; i++) { if(i % 9===0) { %>
-              <optgroup label="Februari" />
-              <% } %>
-                <option value="<%= i + 1 %> Februari">
-                  <%= i + 1 %> Februari
-                </option>
-                <% } %>
-          </select> -->
-          <input id="tanggal_vaksin">
-        </div>
+        <div id="before_vaksin_3">
 
-        <!-- Name -->
-        <div class="form-floating">
-          <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" autocomplete="off">
-          <label class="floating-input" for="name">Nama</label>
-        </div>
-        <div class="mb-3">
-          <span class="small text-muted mb-3">Sesuai (e - KTP)</span>
-        </div>
+          <label for="tanggal_vaksin">Jenis Vaksin</label>
+          <div class="form-group mb-4">
+            <input type="radio" name="jenis_vaksin" id="pfizer" value="pfizer" onclick="jenisVaksin('pfizer')">
+            <label for="pfizer">Pfizer</label>
+
+            <input type="radio" name="jenis_vaksin" id="moderna" value="moderna" onclick="jenisVaksin('moderna')">
+            <label for="moderna">Moderna</label>
+          </div>
+
+          <div id="tanggal_vaksin_">
+            <label for="tanggal_vaksin">Tanggal Vaksin</label>
+            <div class="form-group mb-4">
+              <!-- <select name="tanggal_vaksin" class="form-control column3">
+               <% for(let i=0; i < 27; i++) { if(i % 9===0) { %>
+                 <optgroup label="Februari" />
+                 <% } %>
+                   <option value="<%= i + 1 %> Februari">
+                     <%= i + 1 %> Februari
+                   </option>
+                   <% } %>
+             </select> -->
+              <input id="tanggal_vaksin">
+            </div>
+          </div>
+
+          <!-- Name -->
+          <div class="form-floating">
+            <input type="text" class="form-control" name="nama" id="name" placeholder="Masukkan Nama"
+              autocomplete="off">
+            <label class="floating-input" for="name">Nama</label>
+          </div>
+          <div class="mb-4">
+            <span class="small text-muted mb-4">Sesuai (e - KTP)</span>
+          </div>
 
 
-        <!-- Tanggal Lahir -->
-        <label for="tanggal-lahir">Tanggal Lahir: </label>
-        <div class="row mb-3">
-          <div class="col-4">
+          <!-- Tanggal Lahir -->
+          <label for="tanggal-lahir">Tanggal Lahir: </label>
+          <div class="row mb-4">
+            <div class="col-4">
 
-            <!-- Tanggal -->
-            <select name="tanggal-lahir" id="tanggal-lahir" class="form-control">
-              <% for(let i=0; i < 31; i++) { %>
+              <!-- Tanggal -->
+              <select name="tanggal-lahir" id="tanggal-lahir" class="form-control">
+                <% for(let i=0; i < 31; i++) { %>
                 <option value="<%= i + 1 %>">
                   <%= i + 1 %>
                 </option>
                 <% } %>
-            </select>
-          </div>
+              </select>
+            </div>
 
-          <!-- Bulan -->
-          <div class="col-4">
-            <select name="bulan-lahir" id="bulan-lahir" class="form-control">
-              <% let bulan=['Januari', 'Februari' , 'Maret' , 'April' , 'Mei' , 'Juni' , 'Juli' , 'September'
-                , 'Agustus' , 'Oktober' , 'November' , 'Desember' ]; %>
+            <!-- Bulan -->
+            <div class="col-4">
+              <select name="bulan-lahir" id="bulan-lahir" class="form-control">
+                <% let bulan=['Januari', 'Februari' , 'Maret' , 'April' , 'Mei' , 'Juni' , 'Juli' , 'September'
+                 , 'Agustus' , 'Oktober' , 'November' , 'Desember' ]; %>
                 <% for(let i=0; i < bulan.length; i++) { %>
-                  <option value="<%= i + 1 %>">
-                    <%= bulan[i] %>
-                  </option>
-                  <% } %>
-            </select>
-          </div>
+                <option value="<%= i + 1 %>">
+                  <%= bulan[i] %>
+                </option>
+                <% } %>
+              </select>
+            </div>
 
-          <!-- Tahun -->
-          <div class="col-4">
-            <select name="tahun-lahir" id="tahun-lahir" class="form-control">
-              <% for(let i=1900; i < 2022; i++) { %>
+            <!-- Tahun -->
+            <div class="col-4">
+              <select name="tahun-lahir" id="tahun-lahir" class="form-control">
+                <% for(let i=1900; i < 2022; i++) { %>
                 <option value="<%= i + 1 %>">
                   <%= i + 1 %>
                 </option>
                 <% } %>
-            </select>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <!-- NIK -->
-        <div class="form-floating">
-          <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK">
-          <label class="form-floating-text" for="nik">NIK</label>
-        </div>
-        <div class="mb-3">
-          <span class="small text-muted">NIK dari KK (12-17 tahun), NIK KTP (18+)</span>
-        </div>
+          <!-- NIK -->
+          <div class="form-floating">
+            <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK">
+            <label class="form-floating-text" for="nik">NIK</label>
+          </div>
+          <div class="mb-4">
+            <span class="small text-muted">NIK dari KK (12-17 tahun), NIK KTP (18+)</span>
+          </div>
 
-        <!-- Nomor Telpon -->
-        <div class="form-floating">
-          <input type="text" class="form-control" id="no_telp" placeholder="Masukkan Nomor Handphone">
-          <label class="form-floating-text" for="no_telp">Nomor Telpon</label>
-        </div>
-        <div class="mb-3">
-          <span class="small text-muted m-0">Nomor Handphone bisa WA dan SMS</span>
-        </div>
+          <!-- Nomor Telpon -->
+          <div class="form-floating">
+            <input type="text" class="form-control" id="no_telp" placeholder="Masukkan Nomor Handphone">
+            <label class="form-floating-text" for="no_telp">Nomor Telpon</label>
+          </div>
+          <div class="mb-4">
+            <span class="small text-muted m-0">Nomor Handphone bisa WA dan SMS</span>
+          </div>
 
-        <!-- Informasi -->
-        <div class="mt-5">
-          <h6>Mohon perhatikan poin-poin berikut sebelum datang ke lokasi vaksin :</h6>
-          <ol>
-            <li>Wajib membawa dokumen:</li>
-            <ul>
-              <li>12 - 17 tahun: KK/KIA</li>
-              <li>18+ tahun: e-KTP</li>
-              <li>Untuk peserta vaksinasi dosis 2, wajib membawa bukti vaksinasi dosis 1</li>
-            </ul>
-            <li>Layanan akan dibuka sesuai jadwal:</li>
-            <ul>
-              <li>Sesi 1: pukul 08.00 - 12.00 WIB</li>
-              <li>Sesi 2: pukul 13.00 - 15.00 WIB</li>
-            </ul>
-            <li>Peserta yang tidak datang pada hari yang ditentukan, dianggap membatalkan pendaftaran secara otomatis
-            </li>
-            <li>Vaksin hanya akan diberikan kepada peserta yang sudah mendaftar</li>
-            <li>Peserta wajib menjaga protokol kesehatan. Apabila tidak mematuhi, vaksin tidak dapat diberikan.</li>
-            <li>Peserta harus dalam kondisi sehat</li>
-            <li>Peserta penyandang disabilitas wajib disertai pendamping dan menginformasikan ke panitia</li>
-          </ol>
-        </div>
+          <!-- Informasi -->
+          <div class="mt-5">
+            <h6>Mohon perhatikan poin-poin berikut sebelum datang ke lokasi vaksin :</h6>
+            <ol>
+              <li>Wajib membawa dokumen:</li>
+              <ul>
+                <li>12 - 17 tahun: KK/KIA</li>
+                <li>18+ tahun: e-KTP</li>
+                <li>Untuk peserta vaksinasi dosis 2, wajib membawa bukti vaksinasi dosis 1</li>
+              </ul>
+              <li>Layanan akan dibuka sesuai jadwal:</li>
+              <ul>
+                <li>Sesi 1: pukul 08.00 - 12.00 WIB</li>
+                <li>Sesi 2: pukul 13.00 - 15.00 WIB</li>
+              </ul>
+              <li>Peserta yang tidak datang pada hari yang ditentukan, dianggap membatalkan pendaftaran secara otomatis
+              </li>
+              <li>Vaksin hanya akan diberikan kepada peserta yang sudah mendaftar</li>
+              <li>Peserta wajib menjaga protokol kesehatan. Apabila tidak mematuhi, vaksin tidak dapat diberikan.</li>
+              <li>Peserta harus dalam kondisi sehat</li>
+              <li>Peserta penyandang disabilitas wajib disertai pendamping dan menginformasikan ke panitia</li>
+            </ol>
+          </div>
 
-        <!-- Button -->
-        <div class="d-flex justify-content-center mt-5">
-          <button class="btn btn-primary me-3">Daftar Vaksinasi</button>
-          <button class="btn btn-primary ">Cek Pendaftaran</button>
+          <!-- Button -->
+          <div class="d-flex justify-content-center mt-5">
+            <button class="btn btn-primary me-3">Daftar Vaksinasi</button>
+            <button class="btn btn-primary ">Cek Pendaftaran</button>
+          </div>
         </div>
       </form>
     </div>
@@ -170,14 +212,10 @@
 
   </div>
 
-  <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+  </script>
 
   <!-- Date Picker -->
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
@@ -189,8 +227,29 @@
     $('#tanggal_vaksin').datepicker({
       minDate,
       maxDate,
-      disableDates: []
+      disableDates: [],
+      format: 'yyyy-MM-dd'
     });
+    $("#before_vaksin_3").hide()
+    $("#tanggal_vaksin_").hide()
+
+    const kodeVak = () => {
+      const value = $("#kode_vaksin_3").val();
+      if(value) {
+        $("#before_vaksin_3").show()
+      } else {
+        $("#before_vaksin_3").hide()
+      }
+    }
+
+    const jenisVaksin = (vaksin) => {
+      const valJenisVaksin = $(`#${vaksin}`).val()
+      if(valJenisVaksin) {
+        $("#tanggal_vaksin_").show()
+      } else {
+        $("#tanggal_vaksin_").hide()
+      }
+    }
   </script>
 </body>
 
