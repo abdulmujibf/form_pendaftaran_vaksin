@@ -4,5 +4,25 @@
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "jquery": "^3.6.0"
-  }
+  },
+  "name": "form_pendaftaran_vaksin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulmujibf/form_pendaftaran_vaksin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdulmujibf/form_pendaftaran_vaksin/issues"
+  },
+  "homepage": "https://github.com/abdulmujibf/form_pendaftaran_vaksin#readme",
+  "description": ""
 }
